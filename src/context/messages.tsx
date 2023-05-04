@@ -33,7 +33,7 @@ export function MessagesProvider({ children }: { children: ReactNode }) {
   };
 
   const removeMessage = (id: string) => {
-    setMessages((prev) => prev.filter((messages) => messages.id !== id));
+    setMessages((prev) => prev.filter((message) => message.id !== id));
   };
 
   const updateMessage = (
@@ -43,7 +43,7 @@ export function MessagesProvider({ children }: { children: ReactNode }) {
     setMessages((prev) =>
       prev.map((message) => {
         if (message.id === id) {
-          return { ...message, tetx: updateFn(message.text) };
+          return { ...message, text: updateFn(message.text) };
         }
 
         return message;
