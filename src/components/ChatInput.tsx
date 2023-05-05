@@ -25,17 +25,19 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
   const textareaRef = useRef<null | HTMLTextAreaElement>(null);
 
   const { mutate: sendMessage, isLoading } = useMutation({
-    mutationFn: async (message: Message) => {
+    mutationKey: ["sendMessage"],
+
+    mutationFn: async (_message: Message) => {
       const response = await fetch("/api/message", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ messages: [message] }),
+        body: JSON.stringify({ messages }),
       });
 
-      if(!response.ok){
-        throw new Error()
+      if (!response.ok) {
+        throw new Error();
       }
 
       return response.body;
