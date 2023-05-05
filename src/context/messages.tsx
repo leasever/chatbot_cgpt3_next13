@@ -2,6 +2,14 @@ import { ReactNode, createContext, useState } from "react";
 import { Message } from "@/lib/validators/message";
 import { nanoid } from "nanoid";
 
+const defaultValue = [
+  {
+    id: nanoid(),
+    text: "Hello, how can I help you?",
+    isUserMessage: false,
+  },
+];
+
 export const MessagesContext = createContext<{
   messages: Message[];
   isMessageUpdating: boolean;
@@ -20,13 +28,7 @@ export const MessagesContext = createContext<{
 
 export function MessagesProvider({ children }: { children: ReactNode }) {
   const [isMessageUpdating, setIsMessageUpdating] = useState<boolean>(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: nanoid(),
-      text: "Hello, how can I help you?",
-      isUserMessage: false,
-    },
-  ]);
+  const [messages, setMessages] = useState(defaultValue);
 
   const addMessage = (message: Message) => {
     setMessages((prev) => [...prev, message]);
